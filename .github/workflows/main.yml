@@ -2,7 +2,7 @@ name: GraalVM Native Image builds
 on: [push, pull_request]
 jobs:
   build:
-    name: HelloWorld on ${{ matrix.os }}
+    name: GraalVM on ${{ matrix.os }}
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
@@ -19,15 +19,18 @@ jobs:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           native-image-job-reports: 'true'
 
-      - name: Build and run HelloWorld.java
+      - name: Build and run 
         run: |
-          echo 'public class HelloWorld { public static void main(String[] args) { System.out.println("Hello, World!"); } }' > HelloWorld.java
-          javac HelloWorld.java
-          native-image HelloWorld
-          ./helloworld
+          echo "GRAALVM_HOME: $GRAALVM_HOME"
+          echo "JAVA_HOME: $JAVA_HOME"
+          java --version
+          native-image --version
+
+      - name: using Maven plugin
+        run: mvn clean native:compile -Pnative
       
       - name: Upload binary
         uses: actions/upload-artifact@v4
         with:
-          name: helloworld-${{ matrix.os }}
-          path: helloworld*
+          name: GraalVM-${{ matrix.os }}
+          path: path/to/artifact
