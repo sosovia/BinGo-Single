@@ -35,7 +35,9 @@ jobs:
 
       # 4. 构建 Native 镜像
       - name: Build native image
-        run: mvn -Pnative native:compile -DskipTests -B
+        run: |
+          cd ./bingo-app
+          mvn -Pnative native:compile -DskipTests -B
 
       # 5. 上传构建产物（可选）
       - name: Upload native binary
