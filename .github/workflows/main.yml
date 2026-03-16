@@ -26,6 +26,7 @@ jobs:
           distribution: 'graalvm'
           components: 'native-image'  # 安装 native-image 工具
           cache: maven                # 启用 Maven 缓存
+          github-token: ${{ secrets.GITHUB_TOKEN }}
           native-image-job-reports: 'true'
 
       # 3. 先安装父模块和公共模块到本地仓库
@@ -34,7 +35,7 @@ jobs:
 
       # 4. 构建 Native 镜像
       - name: Build native image
-        run: mvn -Pnative native:compile -DskipTests -B -Dorg.graalvm.nativeimage.options=-J-Xmx4G
+        run: mvn -Pnative native:compile -DskipTests -B
 
       # 5. 上传构建产物（可选）
       - name: Upload native binary
