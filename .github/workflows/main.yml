@@ -6,7 +6,9 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [macos-latest, windows-latest, ubuntu-latest]
+        # 操作系统
+        # os: [macos-latest, windows-latest, ubuntu-latest]
+        os: [windows-latest]
     steps:
       - uses: actions/checkout@v4
 
