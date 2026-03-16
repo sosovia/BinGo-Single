@@ -16,7 +16,7 @@ jobs:
         with:
           java-version: '25'
           distribution: 'graalvm'
-          github-token: ${{ secrets.GITHUB_TOKEN }}
+          github-token: ${{ secrets.YOUR_PERSONAL_TOKEN }}
           native-image-job-reports: 'true'
 
       - name: Build and run 
@@ -28,9 +28,9 @@ jobs:
 
       - name: using Maven plugin
         run: |
-         # cd ./bingo-app
-         # mvn clean native:compile -Pnative
-         mvn -B package --file bingo-app/pom.xml -P native-image
+          cd ./bingo-app
+          mvn clean native:compile -Pnative
+         # mvn -B package --file bingo-app/pom.xml -P native-image
       
       - name: Upload binary
         uses: actions/upload-artifact@v4
