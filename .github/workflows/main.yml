@@ -30,7 +30,7 @@ jobs:
         run: |
          # cd ./bingo-app
          # mvn clean native:compile -Pnative
-         mvn -B native:compile --file bingo/pom.xml -Pnative
+         mvn -B native:compile --file bingo-app/pom.xml -Pnative
       
       - name: Upload binary
         uses: actions/upload-artifact@v4
