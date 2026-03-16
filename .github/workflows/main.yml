@@ -6,6 +6,7 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
+        version: [ latest ]
         # 操作系统
         # os: [macos-latest, windows-latest, ubuntu-latest]
         os: [windows-latest]
@@ -34,12 +35,13 @@ jobs:
       - name: using Maven plugin
         run: |
           mvn package
-         # cd ./bingo-app
-         # mvn clean native:compile -Pnative
+          cd ./bingo-app
+          mvn native:compile -Pnative
          # mvn -B package --file bingo-app/pom.xml -P native-image
       
       - name: Upload binary
         uses: actions/upload-artifact@v4
         with:
-          name: GraalVM-${{ matrix.os }}
-          path: path/to/artifact
+          name: build-artifacts ${{ matrix.version }} on ${{ matrix.os }}
+          path: |
+            target/*.exe
