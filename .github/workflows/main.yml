@@ -11,37 +11,40 @@ jobs:
         # os: [macos-latest, windows-latest, ubuntu-latest]
         os: [windows-latest]
     steps:
+      # 克隆仓库
       - uses: actions/checkout@v4
-
+      # 安装 GraalVM
       - uses: graalvm/setup-graalvm@v1
         with:
           java-version: '25'
           distribution: 'graalvm'
           github-token: ${{ secrets.YOUR_PERSONAL_TOKEN }}
+          components: 'native-image' # 显式声明需要 native-image 组件
+          cache: maven                # 启用 Maven 缓存
           native-image-job-reports: 'true'
 
-      - name: Build and run 
+      - name: Output Environment 
         run: |
           echo "GRAALVM_HOME: $GRAALVM_HOME"
           echo "JAVA_HOME: $JAVA_HOME"
           java --version
           native-image --version
 
-      - name: Cache Maven dependencies
-        uses: actions/cache@v3
-        with:
-          path: ~/.m2
+      # 先安装父模块到本地仓库
+      - name: Install parent and modules
+        run: mvn clean install -DskipTests -B
 
-      - name: using Maven plugin
+      - name: Package SpringBoot Graalvm app
         run: |
-          mvn package
           cd ./bingo-app
-          mvn native:compile -Pnative
+          mvn -Pnative native:compile -DskipTests -B
          # mvn -B package --file bingo-app/pom.xml -P native-image
-      
+
+      # 上传编译产物到 Actions
       - name: Upload binary
         uses: actions/upload-artifact@v4
         with:
           name: build-artifacts ${{ matrix.version }} on ${{ matrix.os }}
+          # 这里是要上传的文件，需要换成你自己的：
           path: |
             target/*.exe
