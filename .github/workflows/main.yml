@@ -27,7 +27,9 @@ jobs:
           native-image --version
 
       - name: using Maven plugin
-        run: mvn clean native:compile -Pnative
+        run: |
+          cd ./bingo-app
+          mvn clean native:compile -Pnative
       
       - name: Upload binary
         uses: actions/upload-artifact@v4
