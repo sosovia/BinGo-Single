@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.bingo</groupId>
+        <artifactId>bingo-modules</artifactId>
+        <version>${revision}</version>
+    </parent>
+
+    <artifactId>bingo-system</artifactId>
+
+    <description>
+        system系统模块
+    </description>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.bingo</groupId>
+            <artifactId>bingo-common-core</artifactId>
+        </dependency>
+
+<!--        <dependency>-->
+<!--            <groupId>com.bingo</groupId>-->
+<!--            <artifactId>bingo-common-doc</artifactId>-->
+<!--        </dependency>-->
+
+        <dependency>
+            <groupId>com.bingo</groupId>
+            <artifactId>bingo-common-json</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.bingo</groupId>
+            <artifactId>bingo-common-mybatis</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.bingo</groupId>
+            <artifactId>bingo-common-web</artifactId>
+        </dependency>
+
+<!--        <dependency>-->
+<!--            <groupId>com.bingo</groupId>-->
+<!--            <artifactId>bingo-common-security</artifactId>-->
+<!--        </dependency>-->
+
+    </dependencies>
+
+</project>

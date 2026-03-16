@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+         http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>com.bingo</groupId>
+        <artifactId>bingo-single</artifactId>
+        <version>${revision}</version>
+    </parent>
+
+    <artifactId>bingo-common</artifactId>
+    <packaging>pom</packaging>
+
+    <description>公共模块父 POM</description>
+
+    <modules>
+        <module>bingo-common-core</module>
+        <module>bingo-common-web</module>
+        <module>bingo-common-mybatis</module>
+        <module>bingo-common-json</module>
+        <module>bingo-common-security</module>
+        <module>bingo-common-satoken</module>
+        <module>bingo-common-doc</module>
+        <module>bingo-common-mybatis-data-permission</module>
+    </modules>
+
+</project>

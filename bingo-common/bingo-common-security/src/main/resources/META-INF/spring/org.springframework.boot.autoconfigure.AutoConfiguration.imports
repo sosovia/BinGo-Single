@@ -1,0 +1,2 @@
+com.bingo.common.security.handler.AllUrlHandler
+com.bingo.common.security.config.SecurityConfig

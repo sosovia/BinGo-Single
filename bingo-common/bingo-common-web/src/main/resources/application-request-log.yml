@@ -1,0 +1,18 @@
+# ================================
+# 请求日志配置
+# ================================
+
+# 是否启用请求日志，默认启用
+request.log.enabled=true
+
+# 是否记录请求头，默认记录
+request.log.logHeaders=true
+
+# 是否记录请求参数，默认记录
+request.log.logParameters=true
+
+# 是否隐藏敏感信息（如密码、token 等），默认隐藏
+request.log.hideSensitiveData=true
+
+# 慢请求阈值（毫秒），超过此阈值的请求会被标记为慢请求，默认 1000ms
+request.log.slowThreshold=1000

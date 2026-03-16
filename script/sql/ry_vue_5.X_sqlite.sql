@@ -1,0 +1,1482 @@
+/*
+ Navicat Premium Dump SQL
+
+ Source Server         : appruo
+ Source Server Type    : SQLite
+ Source Server Version : 3045000 (3.45.0)
+ Source Schema         : main
+
+ Target Server Type    : SQLite
+ Target Server Version : 3045000 (3.45.0)
+ File Encoding         : 65001
+
+ Date: 14/03/2026 18:32:12
+*/
+
+
+-- ----------------------------
+-- Table structure for gen_table
+-- ----------------------------
+DROP TABLE IF EXISTS "gen_table";
+CREATE TABLE "gen_table"
+(
+    "table_id"          integer NOT NULL,
+    "data_name"         text(200),
+    "table_name"        text(200),
+    "table_comment"     text(500),
+    "sub_table_name"    text(64),
+    "sub_table_fk_name" text(64),
+    "class_name"        text(100),
+    "tpl_category"      text(200),
+    "package_name"      text(100),
+    "module_name"       text(30),
+    "business_name"     text(30),
+    "function_name"     text(50),
+    "function_author"   text(50),
+    "gen_type"          text(1),
+    "gen_path"          text(200),
+    "options"           text(1000),
+    "create_dept"       integer,
+    "create_by"         integer,
+    "create_time"       text,
+    "update_by"         integer,
+    "update_time"       text,
+    "remark"            text(500),
+    PRIMARY KEY ("table_id")
+);
+
+-- ----------------------------
+-- Records of gen_table
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for gen_table_column
+-- ----------------------------
+DROP TABLE IF EXISTS "gen_table_column";
+CREATE TABLE "gen_table_column"
+(
+    "column_id"      integer NOT NULL,
+    "table_id"       integer,
+    "column_name"    text(200),
+    "column_comment" text(500),
+    "column_type"    text(100),
+    "java_type"      text(500),
+    "java_field"     text(200),
+    "is_pk"          text(1),
+    "is_increment"   text(1),
+    "is_required"    text(1),
+    "is_insert"      text(1),
+    "is_edit"        text(1),
+    "is_list"        text(1),
+    "is_query"       text(1),
+    "query_type"     text(200),
+    "html_type"      text(200),
+    "dict_type"      text(200),
+    "sort"           integer,
+    "create_dept"    integer,
+    "create_by"      integer,
+    "create_time"    text,
+    "update_by"      integer,
+    "update_time"    text,
+    PRIMARY KEY ("column_id")
+);
+
+-- ----------------------------
+-- Records of gen_table_column
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for sys_client
+-- ----------------------------
+DROP TABLE IF EXISTS "sys_client";
+CREATE TABLE "sys_client"
+(
+    "id"             integer NOT NULL,
+    "client_id"      text(64),
+    "client_key"     text(32),
+    "client_secret"  text(255),
+    "grant_type"     text(255),
+    "device_type"    text(32),
+    "active_timeout" integer,
+    "timeout"        integer,
+    "status"         text(1),
+    "del_flag"       text(1),
+    "create_dept"    integer,
+    "create_by"      integer,
+    "create_time"    text,
+    "update_by"      integer,
+    "update_time"    text,
+    PRIMARY KEY ("id")
+);
+
+-- ----------------------------
+-- Records of sys_client
+-- ----------------------------
+INSERT INTO "sys_client"
+VALUES (1, 'e5cd7e4891bf95d1d19206ce24a7b32e', 'pc', 'pc123', 'password,social', 'pc', 1800, 604800, '0', '0', 103, 1,
+        '2026-03-14 18:22:17', 1, '2026-03-14 18:22:17');
+INSERT INTO "sys_client"
+VALUES (2, '428a8310cd442757ae699df5d894f051', 'app', 'app123', 'password,sms,social', 'android', 1800, 604800, '0',
+        '0', 103, 1, '2026-03-14 18:22:17', 1, '2026-03-14 18:22:17');
+
+-- ----------------------------
+-- Table structure for sys_config
+-- ----------------------------
+DROP TABLE IF EXISTS "sys_config";
+CREATE TABLE "sys_config"
+(
+    "config_id"    integer NOT NULL,
+    "config_name"  text(100),
+    "config_key"   text(100),
+    "config_value" text(500),
+    "config_type"  text(1),
+    "create_dept"  integer,
+    "create_by"    integer,
+    "create_time"  text,
+    "update_by"    integer,
+    "update_time"  text,
+    "remark"       text(500),
+    PRIMARY KEY ("config_id")
+);
+
+-- ----------------------------
+-- Records of sys_config
+-- ----------------------------
+INSERT INTO "sys_config"
+VALUES (1, '主框架页-默认皮肤样式名称', 'sys.index.skinName', 'skin-blue', 'Y', 103, 1, '2026-03-14 18:22:15', NULL,
+        NULL, '蓝色 skin-blue、绿色 skin-green、紫色 skin-purple、红色 skin-red、黄色 skin-yellow');
+INSERT INTO "sys_config"
+VALUES (2, '用户管理-账号初始密码', 'sys.user.initPassword', '123456', 'Y', 103, 1, '2026-03-14 18:22:15', NULL, NULL,
+        '初始化密码 123456');
+INSERT INTO "sys_config"
+VALUES (3, '主框架页-侧边栏主题', 'sys.index.sideTheme', 'theme-dark', 'Y', 103, 1, '2026-03-14 18:22:15', NULL, NULL,
+        '深色主题theme-dark，浅色主题theme-light');
+INSERT INTO "sys_config"
+VALUES (5, '账号自助-是否开启用户注册功能', 'sys.account.registerUser', 'false', 'Y', 103, 1, '2026-03-14 18:22:15',
+        NULL, NULL, '是否开启注册用户功能（true开启，false关闭）');
+INSERT INTO "sys_config"
+VALUES (11, 'OSS预览列表资源开关', 'sys.oss.previewListResource', 'true', 'Y', 103, 1, '2026-03-14 18:22:15', NULL,
+        NULL, 'true:开启, false:关闭');
+
+-- ----------------------------
+-- Table structure for sys_dept
+-- ----------------------------
+DROP TABLE IF EXISTS "sys_dept";
+CREATE TABLE "sys_dept"
+(
+    "dept_id"       integer NOT NULL,
+    "parent_id"     integer,
+    "ancestors"     text(500),
+    "dept_name"     text(30),
+    "dept_category" text(100),
+    "order_num"     integer,
+    "leader"        integer,
+    "phone"         text(11),
+    "email"         text(50),
+    "status"        text(1),
+    "del_flag"      text(1),
+    "create_dept"   integer,
+    "create_by"     integer,
+    "create_time"   text,
+    "update_by"     integer,
+    "update_time"   text,
+    PRIMARY KEY ("dept_id")
+);
+
+-- ----------------------------
+-- Records of sys_dept
+-- ----------------------------
+INSERT INTO "sys_dept"
+VALUES (100, 0, '0', 'XXX科技', NULL, 0, NULL, '15888888888', 'xxx@qq.com', '0', '0', 103, 1, '2026-03-14 18:22:12',
+        NULL, NULL);
+INSERT INTO "sys_dept"
+VALUES (101, 100, '0,100', '深圳总公司', NULL, 1, NULL, '15888888888', 'xxx@qq.com', '0', '0', 103, 1,
+        '2026-03-14 18:22:12', NULL, NULL);
+INSERT INTO "sys_dept"
+VALUES (102, 100, '0,100', '长沙分公司', NULL, 2, NULL, '15888888888', 'xxx@qq.com', '0', '0', 103, 1,
+        '2026-03-14 18:22:12', NULL, NULL);
+INSERT INTO "sys_dept"
+VALUES (103, 101, '0,100,101', '研发部门', NULL, 1, 1, '15888888888', 'xxx@qq.com', '0', '0', 103, 1,
+        '2026-03-14 18:22:12', NULL, NULL);
+INSERT INTO "sys_dept"
+VALUES (104, 101, '0,100,101', '市场部门', NULL, 2, NULL, '15888888888', 'xxx@qq.com', '0', '0', 103, 1,
+        '2026-03-14 18:22:12', NULL, NULL);
+INSERT INTO "sys_dept"
+VALUES (105, 101, '0,100,101', '测试部门', NULL, 3, NULL, '15888888888', 'xxx@qq.com', '0', '0', 103, 1,
+        '2026-03-14 18:22:12', NULL, NULL);
+INSERT INTO "sys_dept"
+VALUES (106, 101, '0,100,101', '财务部门', NULL, 4, NULL, '15888888888', 'xxx@qq.com', '0', '0', 103, 1,
+        '2026-03-14 18:22:12', NULL, NULL);
+INSERT INTO "sys_dept"
+VALUES (107, 101, '0,100,101', '运维部门', NULL, 5, NULL, '15888888888', 'xxx@qq.com', '0', '0', 103, 1,
+        '2026-03-14 18:22:12', NULL, NULL);
+INSERT INTO "sys_dept"
+VALUES (108, 102, '0,100,102', '市场部门', NULL, 1, NULL, '15888888888', 'xxx@qq.com', '0', '0', 103, 1,
+        '2026-03-14 18:22:12', NULL, NULL);
+INSERT INTO "sys_dept"
+VALUES (109, 102, '0,100,102', '财务部门', NULL, 2, NULL, '15888888888', 'xxx@qq.com', '0', '0', 103, 1,
+        '2026-03-14 18:22:12', NULL, NULL);
+
+-- ----------------------------
+-- Table structure for sys_dict_data
+-- ----------------------------
+DROP TABLE IF EXISTS "sys_dict_data";
+CREATE TABLE "sys_dict_data"
+(
+    "dict_code"   integer NOT NULL,
+    "dict_sort"   integer,
+    "dict_label"  text(100),
+    "dict_value"  text(100),
+    "dict_type"   text(100),
+    "css_class"   text(100),
+    "list_class"  text(100),
+    "is_default"  text(1),
+    "create_dept" integer,
+    "create_by"   integer,
+    "create_time" text,
+    "update_by"   integer,
+    "update_time" text,
+    "remark"      text(500),
+    PRIMARY KEY ("dict_code")
+);
+
+-- ----------------------------
+-- Records of sys_dict_data
+-- ----------------------------
+INSERT INTO "sys_dict_data"
+VALUES (1, 1, '男', '0', 'sys_user_sex', '', '', 'Y', 103, 1, '2026-03-14 18:22:15', NULL, NULL, '性别男');
+INSERT INTO "sys_dict_data"
+VALUES (2, 2, '女', '1', 'sys_user_sex', '', '', 'N', 103, 1, '2026-03-14 18:22:15', NULL, NULL, '性别女');
+INSERT INTO "sys_dict_data"
+VALUES (3, 3, '未知', '2', 'sys_user_sex', '', '', 'N', 103, 1, '2026-03-14 18:22:15', NULL, NULL, '性别未知');
+INSERT INTO "sys_dict_data"
+VALUES (4, 1, '显示', '0', 'sys_show_hide', '', 'primary', 'Y', 103, 1, '2026-03-14 18:22:15', NULL, NULL, '显示菜单');
+INSERT INTO "sys_dict_data"
+VALUES (5, 2, '隐藏', '1', 'sys_show_hide', '', 'danger', 'N', 103, 1, '2026-03-14 18:22:15', NULL, NULL, '隐藏菜单');
+INSERT INTO "sys_dict_data"
+VALUES (6, 1, '正常', '0', 'sys_normal_disable', '', 'primary', 'Y', 103, 1, '2026-03-14 18:22:15', NULL, NULL,
+        '正常状态');
+INSERT INTO "sys_dict_data"
+VALUES (7, 2, '停用', '1', 'sys_normal_disable', '', 'danger', 'N', 103, 1, '2026-03-14 18:22:15', NULL, NULL,
+        '停用状态');
+INSERT INTO "sys_dict_data"
+VALUES (12, 1, '是', 'Y', 'sys_yes_no', '', 'primary', 'Y', 103, 1, '2026-03-14 18:22:15', NULL, NULL, '系统默认是');
+INSERT INTO "sys_dict_data"
+VALUES (13, 2, '否', 'N', 'sys_yes_no', '', 'danger', 'N', 103, 1, '2026-03-14 18:22:15', NULL, NULL, '系统默认否');
+INSERT INTO "sys_dict_data"
+VALUES (14, 1, '通知', '1', 'sys_notice_type', '', 'warning', 'Y', 103, 1, '2026-03-14 18:22:15', NULL, NULL, '通知');
+INSERT INTO "sys_dict_data"
+VALUES (15, 2, '公告', '2', 'sys_notice_type', '', 'success', 'N', 103, 1, '2026-03-14 18:22:15', NULL, NULL, '公告');
+INSERT INTO "sys_dict_data"
+VALUES (16, 1, '正常', '0', 'sys_notice_status', '', 'primary', 'Y', 103, 1, '2026-03-14 18:22:15', NULL, NULL,
+        '正常状态');
+INSERT INTO "sys_dict_data"
+VALUES (17, 2, '关闭', '1', 'sys_notice_status', '', 'danger', 'N', 103, 1, '2026-03-14 18:22:15', NULL, NULL,
+        '关闭状态');
+INSERT INTO "sys_dict_data"
+VALUES (18, 1, '新增', '1', 'sys_oper_type', '', 'info', 'N', 103, 1, '2026-03-14 18:22:15', NULL, NULL, '新增操作');
+INSERT INTO "sys_dict_data"
+VALUES (19, 2, '修改', '2', 'sys_oper_type', '', 'info', 'N', 103, 1, '2026-03-14 18:22:15', NULL, NULL, '修改操作');
+INSERT INTO "sys_dict_data"
+VALUES (20, 3, '删除', '3', 'sys_oper_type', '', 'danger', 'N', 103, 1, '2026-03-14 18:22:15', NULL, NULL, '删除操作');
+INSERT INTO "sys_dict_data"
+VALUES (21, 4, '授权', '4', 'sys_oper_type', '', 'primary', 'N', 103, 1, '2026-03-14 18:22:15', NULL, NULL, '授权操作');
+INSERT INTO "sys_dict_data"
+VALUES (22, 5, '导出', '5', 'sys_oper_type', '', 'warning', 'N', 103, 1, '2026-03-14 18:22:15', NULL, NULL, '导出操作');
+INSERT INTO "sys_dict_data"
+VALUES (23, 6, '导入', '6', 'sys_oper_type', '', 'warning', 'N', 103, 1, '2026-03-14 18:22:15', NULL, NULL, '导入操作');
+INSERT INTO "sys_dict_data"
+VALUES (24, 7, '强退', '7', 'sys_oper_type', '', 'danger', 'N', 103, 1, '2026-03-14 18:22:15', NULL, NULL, '强退操作');
+INSERT INTO "sys_dict_data"
+VALUES (25, 8, '生成代码', '8', 'sys_oper_type', '', 'warning', 'N', 103, 1, '2026-03-14 18:22:15', NULL, NULL,
+        '生成操作');
+INSERT INTO "sys_dict_data"
+VALUES (26, 9, '清空数据', '9', 'sys_oper_type', '', 'danger', 'N', 103, 1, '2026-03-14 18:22:15', NULL, NULL,
+        '清空操作');
+INSERT INTO "sys_dict_data"
+VALUES (27, 1, '成功', '0', 'sys_common_status', '', 'primary', 'N', 103, 1, '2026-03-14 18:22:15', NULL, NULL,
+        '正常状态');
+INSERT INTO "sys_dict_data"
+VALUES (28, 2, '失败', '1', 'sys_common_status', '', 'danger', 'N', 103, 1, '2026-03-14 18:22:15', NULL, NULL,
+        '停用状态');
+INSERT INTO "sys_dict_data"
+VALUES (29, 99, '其他', '0', 'sys_oper_type', '', 'info', 'N', 103, 1, '2026-03-14 18:22:15', NULL, NULL, '其他操作');
+INSERT INTO "sys_dict_data"
+VALUES (30, 0, '密码认证', 'password', 'sys_grant_type', 'el-check-tag', 'default', 'N', 103, 1, '2026-03-14 18:22:15',
+        NULL, NULL, '密码认证');
+INSERT INTO "sys_dict_data"
+VALUES (31, 0, '短信认证', 'sms', 'sys_grant_type', 'el-check-tag', 'default', 'N', 103, 1, '2026-03-14 18:22:15', NULL,
+        NULL, '短信认证');
+INSERT INTO "sys_dict_data"
+VALUES (32, 0, '邮件认证', 'email', 'sys_grant_type', 'el-check-tag', 'default', 'N', 103, 1, '2026-03-14 18:22:15',
+        NULL, NULL, '邮件认证');
+INSERT INTO "sys_dict_data"
+VALUES (33, 0, '小程序认证', 'xcx', 'sys_grant_type', 'el-check-tag', 'default', 'N', 103, 1, '2026-03-14 18:22:15',
+        NULL, NULL, '小程序认证');
+INSERT INTO "sys_dict_data"
+VALUES (34, 0, '三方登录认证', 'social', 'sys_grant_type', 'el-check-tag', 'default', 'N', 103, 1,
+        '2026-03-14 18:22:15', NULL, NULL, '三方登录认证');
+INSERT INTO "sys_dict_data"
+VALUES (35, 0, 'PC', 'pc', 'sys_device_type', '', 'default', 'N', 103, 1, '2026-03-14 18:22:15', NULL, NULL, 'PC');
+INSERT INTO "sys_dict_data"
+VALUES (36, 0, '安卓', 'android', 'sys_device_type', '', 'default', 'N', 103, 1, '2026-03-14 18:22:15', NULL, NULL,
+        '安卓');
+INSERT INTO "sys_dict_data"
+VALUES (37, 0, 'iOS', 'ios', 'sys_device_type', '', 'default', 'N', 103, 1, '2026-03-14 18:22:15', NULL, NULL, 'iOS');
+INSERT INTO "sys_dict_data"
+VALUES (38, 0, '小程序', 'xcx', 'sys_device_type', '', 'default', 'N', 103, 1, '2026-03-14 18:22:15', NULL, NULL,
+        '小程序');
+
+-- ----------------------------
+-- Table structure for sys_dict_type
+-- ----------------------------
+DROP TABLE IF EXISTS "sys_dict_type";
+CREATE TABLE "sys_dict_type"
+(
+    "dict_id"     integer NOT NULL,
+    "dict_name"   text(100),
+    "dict_type"   text(100),
+    "create_dept" integer,
+    "create_by"   integer,
+    "create_time" text,
+    "update_by"   integer,
+    "update_time" text,
+    "remark"      text(500),
+    PRIMARY KEY ("dict_id")
+);
+
+-- ----------------------------
+-- Records of sys_dict_type
+-- ----------------------------
+INSERT INTO "sys_dict_type"
+VALUES (1, '用户性别', 'sys_user_sex', 103, 1, '2026-03-14 18:22:15', NULL, NULL, '用户性别列表');
+INSERT INTO "sys_dict_type"
+VALUES (2, '菜单状态', 'sys_show_hide', 103, 1, '2026-03-14 18:22:15', NULL, NULL, '菜单状态列表');
+INSERT INTO "sys_dict_type"
+VALUES (3, '系统开关', 'sys_normal_disable', 103, 1, '2026-03-14 18:22:15', NULL, NULL, '系统开关列表');
+INSERT INTO "sys_dict_type"
+VALUES (6, '系统是否', 'sys_yes_no', 103, 1, '2026-03-14 18:22:15', NULL, NULL, '系统是否列表');
+INSERT INTO "sys_dict_type"
+VALUES (7, '通知类型', 'sys_notice_type', 103, 1, '2026-03-14 18:22:15', NULL, NULL, '通知类型列表');
+INSERT INTO "sys_dict_type"
+VALUES (8, '通知状态', 'sys_notice_status', 103, 1, '2026-03-14 18:22:15', NULL, NULL, '通知状态列表');
+INSERT INTO "sys_dict_type"
+VALUES (9, '操作类型', 'sys_oper_type', 103, 1, '2026-03-14 18:22:15', NULL, NULL, '操作类型列表');
+INSERT INTO "sys_dict_type"
+VALUES (10, '系统状态', 'sys_common_status', 103, 1, '2026-03-14 18:22:15', NULL, NULL, '登录状态列表');
+INSERT INTO "sys_dict_type"
+VALUES (11, '授权类型', 'sys_grant_type', 103, 1, '2026-03-14 18:22:15', NULL, NULL, '认证授权类型');
+INSERT INTO "sys_dict_type"
+VALUES (12, '设备类型', 'sys_device_type', 103, 1, '2026-03-14 18:22:15', NULL, NULL, '客户端设备类型');
+
+-- ----------------------------
+-- Table structure for sys_login_info
+-- ----------------------------
+DROP TABLE IF EXISTS "sys_login_info";
+CREATE TABLE "sys_login_info"
+(
+    "info_id"        integer NOT NULL,
+    "user_name"      text(50),
+    "client_key"     text(32),
+    "device_type"    text(32),
+    "ipaddr"         text(128),
+    "login_location" text(255),
+    "browser"        text(50),
+    "os"             text(50),
+    "status"         text(1),
+    "msg"            text(255),
+    "login_time"     text,
+    PRIMARY KEY ("info_id")
+);
+
+-- ----------------------------
+-- Records of sys_login_info
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for sys_menu
+-- ----------------------------
+DROP TABLE IF EXISTS "sys_menu";
+CREATE TABLE "sys_menu"
+(
+    "menu_id"     integer  NOT NULL,
+    "menu_name"   text(50) NOT NULL,
+    "parent_id"   integer,
+    "order_num"   integer,
+    "path"        text(200),
+    "component"   text(255),
+    "query_param" text(255),
+    "is_frame"    integer,
+    "is_cache"    integer,
+    "menu_type"   text(1),
+    "visible"     text(1),
+    "status"      text(1),
+    "perms"       text(100),
+    "icon"        text(100),
+    "create_dept" integer,
+    "create_by"   integer,
+    "create_time" text,
+    "update_by"   integer,
+    "update_time" text,
+    "remark"      text(500),
+    PRIMARY KEY ("menu_id")
+);
+
+-- ----------------------------
+-- Records of sys_menu
+-- ----------------------------
+INSERT INTO "sys_menu"
+VALUES (1, '系统管理', 0, 1, 'system', NULL, '', 1, 0, 'M', '0', '0', '', 'system', 103, 1, '2026-03-14 18:22:13', NULL,
+        NULL, '系统管理目录');
+INSERT INTO "sys_menu"
+VALUES (2, '系统监控', 0, 3, 'monitor', NULL, '', 1, 0, 'M', '0', '0', '', 'monitor', 103, 1, '2026-03-14 18:22:13',
+        NULL, NULL, '系统监控目录');
+INSERT INTO "sys_menu"
+VALUES (3, '系统工具', 0, 4, 'tool', NULL, '', 1, 0, 'M', '0', '0', '', 'tool', 103, 1, '2026-03-14 18:22:13', NULL,
+        NULL, '系统工具目录');
+INSERT INTO "sys_menu"
+VALUES (4, 'PLUS官网', 0, 5, 'https://gitee.com/dromara/RuoYi-Vue-Plus', NULL, '', 0, 0, 'M', '0', '0', '', 'guide',
+        103, 1, '2026-03-14 18:22:13', NULL, NULL, 'RuoYi-Vue-Plus官网地址');
+INSERT INTO "sys_menu"
+VALUES (5, '测试菜单', 0, 5, 'demo', NULL, '', 1, 0, 'M', '0', '0', '', 'star', 103, 1, '2026-03-14 18:22:13', NULL,
+        NULL, '测试菜单');
+INSERT INTO "sys_menu"
+VALUES (100, '用户管理', 1, 1, 'user', 'system/user/index', '', 1, 0, 'C', '0', '0', 'system:user:list', 'user', 103, 1,
+        '2026-03-14 18:22:13', NULL, NULL, '用户管理菜单');
+INSERT INTO "sys_menu"
+VALUES (101, '角色管理', 1, 2, 'role', 'system/role/index', '', 1, 0, 'C', '0', '0', 'system:role:list', 'peoples', 103,
+        1, '2026-03-14 18:22:13', NULL, NULL, '角色管理菜单');
+INSERT INTO "sys_menu"
+VALUES (102, '菜单管理', 1, 3, 'menu', 'system/menu/index', '', 1, 0, 'C', '0', '0', 'system:menu:list', 'tree-table',
+        103, 1, '2026-03-14 18:22:13', NULL, NULL, '菜单管理菜单');
+INSERT INTO "sys_menu"
+VALUES (103, '部门管理', 1, 4, 'dept', 'system/dept/index', '', 1, 0, 'C', '0', '0', 'system:dept:list', 'tree', 103, 1,
+        '2026-03-14 18:22:13', NULL, NULL, '部门管理菜单');
+INSERT INTO "sys_menu"
+VALUES (104, '岗位管理', 1, 5, 'post', 'system/post/index', '', 1, 0, 'C', '0', '0', 'system:post:list', 'post', 103, 1,
+        '2026-03-14 18:22:13', NULL, NULL, '岗位管理菜单');
+INSERT INTO "sys_menu"
+VALUES (105, '字典管理', 1, 6, 'dict', 'system/dict/index', '', 1, 0, 'C', '0', '0', 'system:dict:list', 'dict', 103, 1,
+        '2026-03-14 18:22:13', NULL, NULL, '字典管理菜单');
+INSERT INTO "sys_menu"
+VALUES (106, '参数设置', 1, 7, 'config', 'system/config/index', '', 1, 0, 'C', '0', '0', 'system:config:list', 'edit',
+        103, 1, '2026-03-14 18:22:13', NULL, NULL, '参数设置菜单');
+INSERT INTO "sys_menu"
+VALUES (107, '通知公告', 1, 8, 'notice', 'system/notice/index', '', 1, 0, 'C', '0', '0', 'system:notice:list',
+        'message', 103, 1, '2026-03-14 18:22:13', NULL, NULL, '通知公告菜单');
+INSERT INTO "sys_menu"
+VALUES (108, '日志管理', 1, 9, 'log', '', '', 1, 0, 'M', '0', '0', '', 'log', 103, 1, '2026-03-14 18:22:13', NULL, NULL,
+        '日志管理菜单');
+INSERT INTO "sys_menu"
+VALUES (109, '在线用户', 2, 1, 'online', 'monitor/online/index', '', 1, 0, 'C', '0', '0', 'monitor:online:list',
+        'online', 103, 1, '2026-03-14 18:22:13', NULL, NULL, '在线用户菜单');
+INSERT INTO "sys_menu"
+VALUES (113, '缓存监控', 2, 5, 'cache', 'monitor/cache/index', '', 1, 0, 'C', '0', '0', 'monitor:cache:list', 'redis',
+        103, 1, '2026-03-14 18:22:13', NULL, NULL, '缓存监控菜单');
+INSERT INTO "sys_menu"
+VALUES (115, '代码生成', 3, 2, 'gen', 'tool/gen/index', '', 1, 0, 'C', '0', '0', 'tool:gen:list', 'code', 103, 1,
+        '2026-03-14 18:22:13', NULL, NULL, '代码生成菜单');
+INSERT INTO "sys_menu"
+VALUES (116, '修改生成配置', 3, 2, 'gen-edit/index/:tableId', 'tool/gen/editTable', '', 1, 1, 'C', '1', '0',
+        'tool:gen:edit', '#', 103, 1, '2026-03-14 18:22:13', NULL, NULL, '/tool/gen');
+INSERT INTO "sys_menu"
+VALUES (117, 'Admin监控', 2, 5, 'Admin', 'monitor/admin/index', '', 1, 0, 'C', '0', '0', 'monitor:admin:list',
+        'dashboard', 103, 1, '2026-03-14 18:22:13', NULL, NULL, 'Admin监控菜单');
+INSERT INTO "sys_menu"
+VALUES (118, '文件管理', 1, 10, 'oss', 'system/oss/index', '', 1, 0, 'C', '0', '0', 'system:oss:list', 'upload', 103, 1,
+        '2026-03-14 18:22:13', NULL, NULL, '文件管理菜单');
+INSERT INTO "sys_menu"
+VALUES (120, '任务调度中心', 2, 6, 'snailjob', 'monitor/snailjob/index', '', 1, 0, 'C', '0', '0',
+        'monitor:snailjob:list', 'job', 103, 1, '2026-03-14 18:22:13', NULL, NULL, 'SnailJob控制台菜单');
+INSERT INTO "sys_menu"
+VALUES (123, '客户端管理', 1, 11, 'client', 'system/client/index', '', 1, 0, 'C', '0', '0', 'system:client:list',
+        'international', 103, 1, '2026-03-14 18:22:13', NULL, NULL, '客户端管理菜单');
+INSERT INTO "sys_menu"
+VALUES (130, '分配用户', 1, 2, 'role-auth/user/:roleId', 'system/role/authUser', '', 1, 1, 'C', '1', '0',
+        'system:role:edit', '#', 103, 1, '2026-03-14 18:22:13', NULL, NULL, '/system/role');
+INSERT INTO "sys_menu"
+VALUES (131, '分配角色', 1, 1, 'user-auth/role/:userId', 'system/user/authRole', '', 1, 1, 'C', '1', '0',
+        'system:user:edit', '#', 103, 1, '2026-03-14 18:22:13', NULL, NULL, '/system/user');
+INSERT INTO "sys_menu"
+VALUES (132, '字典数据', 1, 6, 'dict-data/index/:dictId', 'system/dict/data', '', 1, 1, 'C', '1', '0',
+        'system:dict:list', '#', 103, 1, '2026-03-14 18:22:13', NULL, NULL, '/system/dict');
+INSERT INTO "sys_menu"
+VALUES (133, '文件配置管理', 1, 10, 'oss-config/index', 'system/oss/config', '', 1, 1, 'C', '1', '0',
+        'system:ossConfig:list', '#', 103, 1, '2026-03-14 18:22:13', NULL, NULL, '/system/oss');
+INSERT INTO "sys_menu"
+VALUES (500, '操作日志', 108, 1, 'operlog', 'monitor/operlog/index', '', 1, 0, 'C', '0', '0', 'monitor:operlog:list',
+        'form', 103, 1, '2026-03-14 18:22:13', NULL, NULL, '操作日志菜单');
+INSERT INTO "sys_menu"
+VALUES (501, '登录日志', 108, 2, 'loginInfo', 'monitor/loginInfo/index', '', 1, 0, 'C', '0', '0',
+        'monitor:loginInfo:list', 'loginInfo', 103, 1, '2026-03-14 18:22:13', NULL, NULL, '登录日志菜单');
+INSERT INTO "sys_menu"
+VALUES (1001, '用户查询', 100, 1, '', '', '', 1, 0, 'F', '0', '0', 'system:user:query', '#', 103, 1,
+        '2026-03-14 18:22:13', NULL, NULL, '');
+INSERT INTO "sys_menu"
+VALUES (1002, '用户新增', 100, 2, '', '', '', 1, 0, 'F', '0', '0', 'system:user:add', '#', 103, 1,
+        '2026-03-14 18:22:13', NULL, NULL, '');
+INSERT INTO "sys_menu"
+VALUES (1003, '用户修改', 100, 3, '', '', '', 1, 0, 'F', '0', '0', 'system:user:edit', '#', 103, 1,
+        '2026-03-14 18:22:13', NULL, NULL, '');
+INSERT INTO "sys_menu"
+VALUES (1004, '用户删除', 100, 4, '', '', '', 1, 0, 'F', '0', '0', 'system:user:remove', '#', 103, 1,
+        '2026-03-14 18:22:13', NULL, NULL, '');
+INSERT INTO "sys_menu"
+VALUES (1005, '用户导出', 100, 5, '', '', '', 1, 0, 'F', '0', '0', 'system:user:export', '#', 103, 1,
+        '2026-03-14 18:22:13', NULL, NULL, '');
+INSERT INTO "sys_menu"
+VALUES (1006, '用户导入', 100, 6, '', '', '', 1, 0, 'F', '0', '0', 'system:user:import', '#', 103, 1,
+        '2026-03-14 18:22:13', NULL, NULL, '');
+INSERT INTO "sys_menu"
+VALUES (1007, '重置密码', 100, 7, '', '', '', 1, 0, 'F', '0', '0', 'system:user:resetPwd', '#', 103, 1,
+        '2026-03-14 18:22:13', NULL, NULL, '');
+INSERT INTO "sys_menu"
+VALUES (1008, '角色查询', 101, 1, '', '', '', 1, 0, 'F', '0', '0', 'system:role:query', '#', 103, 1,
+        '2026-03-14 18:22:13', NULL, NULL, '');
+INSERT INTO "sys_menu"
+VALUES (1009, '角色新增', 101, 2, '', '', '', 1, 0, 'F', '0', '0', 'system:role:add', '#', 103, 1,
+        '2026-03-14 18:22:13', NULL, NULL, '');
+INSERT INTO "sys_menu"
+VALUES (1010, '角色修改', 101, 3, '', '', '', 1, 0, 'F', '0', '0', 'system:role:edit', '#', 103, 1,
+        '2026-03-14 18:22:13', NULL, NULL, '');
+INSERT INTO "sys_menu"
+VALUES (1011, '角色删除', 101, 4, '', '', '', 1, 0, 'F', '0', '0', 'system:role:remove', '#', 103, 1,
+        '2026-03-14 18:22:13', NULL, NULL, '');
+INSERT INTO "sys_menu"
+VALUES (1012, '角色导出', 101, 5, '', '', '', 1, 0, 'F', '0', '0', 'system:role:export', '#', 103, 1,
+        '2026-03-14 18:22:13', NULL, NULL, '');
+INSERT INTO "sys_menu"
+VALUES (1013, '菜单查询', 102, 1, '', '', '', 1, 0, 'F', '0', '0', 'system:menu:query', '#', 103, 1,
+        '2026-03-14 18:22:13', NULL, NULL, '');
+INSERT INTO "sys_menu"
+VALUES (1014, '菜单新增', 102, 2, '', '', '', 1, 0, 'F', '0', '0', 'system:menu:add', '#', 103, 1,
+        '2026-03-14 18:22:13', NULL, NULL, '');
+INSERT INTO "sys_menu"
+VALUES (1015, '菜单修改', 102, 3, '', '', '', 1, 0, 'F', '0', '0', 'system:menu:edit', '#', 103, 1,
+        '2026-03-14 18:22:13', NULL, NULL, '');
+INSERT INTO "sys_menu"
+VALUES (1016, '菜单删除', 102, 4, '', '', '', 1, 0, 'F', '0', '0', 'system:menu:remove', '#', 103, 1,
+        '2026-03-14 18:22:13', NULL, NULL, '');
+INSERT INTO "sys_menu"
+VALUES (1017, '部门查询', 103, 1, '', '', '', 1, 0, 'F', '0', '0', 'system:dept:query', '#', 103, 1,
+        '2026-03-14 18:22:13', NULL, NULL, '');
+INSERT INTO "sys_menu"
+VALUES (1018, '部门新增', 103, 2, '', '', '', 1, 0, 'F', '0', '0', 'system:dept:add', '#', 103, 1,
+        '2026-03-14 18:22:13', NULL, NULL, '');
+INSERT INTO "sys_menu"
+VALUES (1019, '部门修改', 103, 3, '', '', '', 1, 0, 'F', '0', '0', 'system:dept:edit', '#', 103, 1,
+        '2026-03-14 18:22:13', NULL, NULL, '');
+INSERT INTO "sys_menu"
+VALUES (1020, '部门删除', 103, 4, '', '', '', 1, 0, 'F', '0', '0', 'system:dept:remove', '#', 103, 1,
+        '2026-03-14 18:22:13', NULL, NULL, '');
+INSERT INTO "sys_menu"
+VALUES (1021, '岗位查询', 104, 1, '', '', '', 1, 0, 'F', '0', '0', 'system:post:query', '#', 103, 1,
+        '2026-03-14 18:22:13', NULL, NULL, '');
+INSERT INTO "sys_menu"
+VALUES (1022, '岗位新增', 104, 2, '', '', '', 1, 0, 'F', '0', '0', 'system:post:add', '#', 103, 1,
+        '2026-03-14 18:22:13', NULL, NULL, '');
+INSERT INTO "sys_menu"
+VALUES (1023, '岗位修改', 104, 3, '', '', '', 1, 0, 'F', '0', '0', 'system:post:edit', '#', 103, 1,
+        '2026-03-14 18:22:13', NULL, NULL, '');
+INSERT INTO "sys_menu"
+VALUES (1024, '岗位删除', 104, 4, '', '', '', 1, 0, 'F', '0', '0', 'system:post:remove', '#', 103, 1,
+        '2026-03-14 18:22:13', NULL, NULL, '');
+INSERT INTO "sys_menu"
+VALUES (1025, '岗位导出', 104, 5, '', '', '', 1, 0, 'F', '0', '0', 'system:post:export', '#', 103, 1,
+        '2026-03-14 18:22:13', NULL, NULL, '');
+INSERT INTO "sys_menu"
+VALUES (1026, '字典查询', 105, 1, '#', '', '', 1, 0, 'F', '0', '0', 'system:dict:query', '#', 103, 1,
+        '2026-03-14 18:22:13', NULL, NULL, '');
+INSERT INTO "sys_menu"
+VALUES (1027, '字典新增', 105, 2, '#', '', '', 1, 0, 'F', '0', '0', 'system:dict:add', '#', 103, 1,
+        '2026-03-14 18:22:13', NULL, NULL, '');
+INSERT INTO "sys_menu"
+VALUES (1028, '字典修改', 105, 3, '#', '', '', 1, 0, 'F', '0', '0', 'system:dict:edit', '#', 103, 1,
+        '2026-03-14 18:22:13', NULL, NULL, '');
+INSERT INTO "sys_menu"
+VALUES (1029, '字典删除', 105, 4, '#', '', '', 1, 0, 'F', '0', '0', 'system:dict:remove', '#', 103, 1,
+        '2026-03-14 18:22:13', NULL, NULL, '');
+INSERT INTO "sys_menu"
+VALUES (1030, '字典导出', 105, 5, '#', '', '', 1, 0, 'F', '0', '0', 'system:dict:export', '#', 103, 1,
+        '2026-03-14 18:22:13', NULL, NULL, '');
+INSERT INTO "sys_menu"
+VALUES (1031, '参数查询', 106, 1, '#', '', '', 1, 0, 'F', '0', '0', 'system:config:query', '#', 103, 1,
+        '2026-03-14 18:22:13', NULL, NULL, '');
+INSERT INTO "sys_menu"
+VALUES (1032, '参数新增', 106, 2, '#', '', '', 1, 0, 'F', '0', '0', 'system:config:add', '#', 103, 1,
+        '2026-03-14 18:22:13', NULL, NULL, '');
+INSERT INTO "sys_menu"
+VALUES (1033, '参数修改', 106, 3, '#', '', '', 1, 0, 'F', '0', '0', 'system:config:edit', '#', 103, 1,
+        '2026-03-14 18:22:13', NULL, NULL, '');
+INSERT INTO "sys_menu"
+VALUES (1034, '参数删除', 106, 4, '#', '', '', 1, 0, 'F', '0', '0', 'system:config:remove', '#', 103, 1,
+        '2026-03-14 18:22:13', NULL, NULL, '');
+INSERT INTO "sys_menu"
+VALUES (1035, '参数导出', 106, 5, '#', '', '', 1, 0, 'F', '0', '0', 'system:config:export', '#', 103, 1,
+        '2026-03-14 18:22:13', NULL, NULL, '');
+INSERT INTO "sys_menu"
+VALUES (1036, '公告查询', 107, 1, '#', '', '', 1, 0, 'F', '0', '0', 'system:notice:query', '#', 103, 1,
+        '2026-03-14 18:22:13', NULL, NULL, '');
+INSERT INTO "sys_menu"
+VALUES (1037, '公告新增', 107, 2, '#', '', '', 1, 0, 'F', '0', '0', 'system:notice:add', '#', 103, 1,
+        '2026-03-14 18:22:13', NULL, NULL, '');
+INSERT INTO "sys_menu"
+VALUES (1038, '公告修改', 107, 3, '#', '', '', 1, 0, 'F', '0', '0', 'system:notice:edit', '#', 103, 1,
+        '2026-03-14 18:22:13', NULL, NULL, '');
+INSERT INTO "sys_menu"
+VALUES (1039, '公告删除', 107, 4, '#', '', '', 1, 0, 'F', '0', '0', 'system:notice:remove', '#', 103, 1,
+        '2026-03-14 18:22:13', NULL, NULL, '');
+INSERT INTO "sys_menu"
+VALUES (1040, '操作查询', 500, 1, '#', '', '', 1, 0, 'F', '0', '0', 'monitor:operlog:query', '#', 103, 1,
+        '2026-03-14 18:22:13', NULL, NULL, '');
+INSERT INTO "sys_menu"
+VALUES (1041, '操作删除', 500, 2, '#', '', '', 1, 0, 'F', '0', '0', 'monitor:operlog:remove', '#', 103, 1,
+        '2026-03-14 18:22:13', NULL, NULL, '');
+INSERT INTO "sys_menu"
+VALUES (1042, '日志导出', 500, 4, '#', '', '', 1, 0, 'F', '0', '0', 'monitor:operlog:export', '#', 103, 1,
+        '2026-03-14 18:22:13', NULL, NULL, '');
+INSERT INTO "sys_menu"
+VALUES (1043, '登录查询', 501, 1, '#', '', '', 1, 0, 'F', '0', '0', 'monitor:loginInfo:query', '#', 103, 1,
+        '2026-03-14 18:22:13', NULL, NULL, '');
+INSERT INTO "sys_menu"
+VALUES (1044, '登录删除', 501, 2, '#', '', '', 1, 0, 'F', '0', '0', 'monitor:loginInfo:remove', '#', 103, 1,
+        '2026-03-14 18:22:13', NULL, NULL, '');
+INSERT INTO "sys_menu"
+VALUES (1045, '日志导出', 501, 3, '#', '', '', 1, 0, 'F', '0', '0', 'monitor:loginInfo:export', '#', 103, 1,
+        '2026-03-14 18:22:13', NULL, NULL, '');
+INSERT INTO "sys_menu"
+VALUES (1046, '在线查询', 109, 1, '#', '', '', 1, 0, 'F', '0', '0', 'monitor:online:query', '#', 103, 1,
+        '2026-03-14 18:22:13', NULL, NULL, '');
+INSERT INTO "sys_menu"
+VALUES (1047, '批量强退', 109, 2, '#', '', '', 1, 0, 'F', '0', '0', 'monitor:online:batchLogout', '#', 103, 1,
+        '2026-03-14 18:22:13', NULL, NULL, '');
+INSERT INTO "sys_menu"
+VALUES (1048, '单条强退', 109, 3, '#', '', '', 1, 0, 'F', '0', '0', 'monitor:online:forceLogout', '#', 103, 1,
+        '2026-03-14 18:22:13', NULL, NULL, '');
+INSERT INTO "sys_menu"
+VALUES (1050, '账户解锁', 501, 4, '#', '', '', 1, 0, 'F', '0', '0', 'monitor:loginInfo:unlock', '#', 103, 1,
+        '2026-03-14 18:22:13', NULL, NULL, '');
+INSERT INTO "sys_menu"
+VALUES (1055, '生成查询', 115, 1, '#', '', '', 1, 0, 'F', '0', '0', 'tool:gen:query', '#', 103, 1,
+        '2026-03-14 18:22:13', NULL, NULL, '');
+INSERT INTO "sys_menu"
+VALUES (1056, '生成修改', 115, 2, '#', '', '', 1, 0, 'F', '0', '0', 'tool:gen:edit', '#', 103, 1, '2026-03-14 18:22:13',
+        NULL, NULL, '');
+INSERT INTO "sys_menu"
+VALUES (1057, '生成删除', 115, 3, '#', '', '', 1, 0, 'F', '0', '0', 'tool:gen:remove', '#', 103, 1,
+        '2026-03-14 18:22:13', NULL, NULL, '');
+INSERT INTO "sys_menu"
+VALUES (1058, '导入代码', 115, 2, '#', '', '', 1, 0, 'F', '0', '0', 'tool:gen:import', '#', 103, 1,
+        '2026-03-14 18:22:13', NULL, NULL, '');
+INSERT INTO "sys_menu"
+VALUES (1059, '预览代码', 115, 4, '#', '', '', 1, 0, 'F', '0', '0', 'tool:gen:preview', '#', 103, 1,
+        '2026-03-14 18:22:13', NULL, NULL, '');
+INSERT INTO "sys_menu"
+VALUES (1060, '生成代码', 115, 5, '#', '', '', 1, 0, 'F', '0', '0', 'tool:gen:code', '#', 103, 1, '2026-03-14 18:22:13',
+        NULL, NULL, '');
+INSERT INTO "sys_menu"
+VALUES (1061, '客户端管理查询', 123, 1, '#', '', '', 1, 0, 'F', '0', '0', 'system:client:query', '#', 103, 1,
+        '2026-03-14 18:22:13', NULL, NULL, '');
+INSERT INTO "sys_menu"
+VALUES (1062, '客户端管理新增', 123, 2, '#', '', '', 1, 0, 'F', '0', '0', 'system:client:add', '#', 103, 1,
+        '2026-03-14 18:22:13', NULL, NULL, '');
+INSERT INTO "sys_menu"
+VALUES (1063, '客户端管理修改', 123, 3, '#', '', '', 1, 0, 'F', '0', '0', 'system:client:edit', '#', 103, 1,
+        '2026-03-14 18:22:13', NULL, NULL, '');
+INSERT INTO "sys_menu"
+VALUES (1064, '客户端管理删除', 123, 4, '#', '', '', 1, 0, 'F', '0', '0', 'system:client:remove', '#', 103, 1,
+        '2026-03-14 18:22:13', NULL, NULL, '');
+INSERT INTO "sys_menu"
+VALUES (1065, '客户端管理导出', 123, 5, '#', '', '', 1, 0, 'F', '0', '0', 'system:client:export', '#', 103, 1,
+        '2026-03-14 18:22:13', NULL, NULL, '');
+INSERT INTO "sys_menu"
+VALUES (1500, '测试单表', 5, 1, 'demo', 'demo/demo/index', '', 1, 0, 'C', '0', '0', 'demo:demo:list', '#', 103, 1,
+        '2026-03-14 18:22:13', NULL, NULL, '测试单表菜单');
+INSERT INTO "sys_menu"
+VALUES (1501, '测试单表查询', 1500, 1, '#', '', '', 1, 0, 'F', '0', '0', 'demo:demo:query', '#', 103, 1,
+        '2026-03-14 18:22:13', NULL, NULL, '');
+INSERT INTO "sys_menu"
+VALUES (1502, '测试单表新增', 1500, 2, '#', '', '', 1, 0, 'F', '0', '0', 'demo:demo:add', '#', 103, 1,
+        '2026-03-14 18:22:13', NULL, NULL, '');
+INSERT INTO "sys_menu"
+VALUES (1503, '测试单表修改', 1500, 3, '#', '', '', 1, 0, 'F', '0', '0', 'demo:demo:edit', '#', 103, 1,
+        '2026-03-14 18:22:13', NULL, NULL, '');
+INSERT INTO "sys_menu"
+VALUES (1504, '测试单表删除', 1500, 4, '#', '', '', 1, 0, 'F', '0', '0', 'demo:demo:remove', '#', 103, 1,
+        '2026-03-14 18:22:13', NULL, NULL, '');
+INSERT INTO "sys_menu"
+VALUES (1505, '测试单表导出', 1500, 5, '#', '', '', 1, 0, 'F', '0', '0', 'demo:demo:export', '#', 103, 1,
+        '2026-03-14 18:22:13', NULL, NULL, '');
+INSERT INTO "sys_menu"
+VALUES (1506, '测试树表', 5, 1, 'tree', 'demo/tree/index', '', 1, 0, 'C', '0', '0', 'demo:tree:list', '#', 103, 1,
+        '2026-03-14 18:22:13', NULL, NULL, '测试树表菜单');
+INSERT INTO "sys_menu"
+VALUES (1507, '测试树表查询', 1506, 1, '#', '', '', 1, 0, 'F', '0', '0', 'demo:tree:query', '#', 103, 1,
+        '2026-03-14 18:22:13', NULL, NULL, '');
+INSERT INTO "sys_menu"
+VALUES (1508, '测试树表新增', 1506, 2, '#', '', '', 1, 0, 'F', '0', '0', 'demo:tree:add', '#', 103, 1,
+        '2026-03-14 18:22:13', NULL, NULL, '');
+INSERT INTO "sys_menu"
+VALUES (1509, '测试树表修改', 1506, 3, '#', '', '', 1, 0, 'F', '0', '0', 'demo:tree:edit', '#', 103, 1,
+        '2026-03-14 18:22:13', NULL, NULL, '');
+INSERT INTO "sys_menu"
+VALUES (1510, '测试树表删除', 1506, 4, '#', '', '', 1, 0, 'F', '0', '0', 'demo:tree:remove', '#', 103, 1,
+        '2026-03-14 18:22:13', NULL, NULL, '');
+INSERT INTO "sys_menu"
+VALUES (1511, '测试树表导出', 1506, 5, '#', '', '', 1, 0, 'F', '0', '0', 'demo:tree:export', '#', 103, 1,
+        '2026-03-14 18:22:13', NULL, NULL, '');
+INSERT INTO "sys_menu"
+VALUES (1600, '文件查询', 118, 1, '#', '', '', 1, 0, 'F', '0', '0', 'system:oss:query', '#', 103, 1,
+        '2026-03-14 18:22:13', NULL, NULL, '');
+INSERT INTO "sys_menu"
+VALUES (1601, '文件上传', 118, 2, '#', '', '', 1, 0, 'F', '0', '0', 'system:oss:upload', '#', 103, 1,
+        '2026-03-14 18:22:13', NULL, NULL, '');
+INSERT INTO "sys_menu"
+VALUES (1602, '文件下载', 118, 3, '#', '', '', 1, 0, 'F', '0', '0', 'system:oss:download', '#', 103, 1,
+        '2026-03-14 18:22:13', NULL, NULL, '');
+INSERT INTO "sys_menu"
+VALUES (1603, '文件删除', 118, 4, '#', '', '', 1, 0, 'F', '0', '0', 'system:oss:remove', '#', 103, 1,
+        '2026-03-14 18:22:13', NULL, NULL, '');
+INSERT INTO "sys_menu"
+VALUES (1620, '配置列表', 118, 5, '#', '', '', 1, 0, 'F', '0', '0', 'system:ossConfig:list', '#', 103, 1,
+        '2026-03-14 18:22:13', NULL, NULL, '');
+INSERT INTO "sys_menu"
+VALUES (1621, '配置添加', 118, 6, '#', '', '', 1, 0, 'F', '0', '0', 'system:ossConfig:add', '#', 103, 1,
+        '2026-03-14 18:22:13', NULL, NULL, '');
+INSERT INTO "sys_menu"
+VALUES (1622, '配置编辑', 118, 6, '#', '', '', 1, 0, 'F', '0', '0', 'system:ossConfig:edit', '#', 103, 1,
+        '2026-03-14 18:22:13', NULL, NULL, '');
+INSERT INTO "sys_menu"
+VALUES (1623, '配置删除', 118, 6, '#', '', '', 1, 0, 'F', '0', '0', 'system:ossConfig:remove', '#', 103, 1,
+        '2026-03-14 18:22:13', NULL, NULL, '');
+
+-- ----------------------------
+-- Table structure for sys_notice
+-- ----------------------------
+DROP TABLE IF EXISTS "sys_notice";
+CREATE TABLE "sys_notice"
+(
+    "notice_id"      integer  NOT NULL,
+    "notice_title"   text(50) NOT NULL,
+    "notice_type"    text(1)  NOT NULL,
+    "notice_content" blob,
+    "status"         text(1),
+    "create_dept"    integer,
+    "create_by"      integer,
+    "create_time"    text,
+    "update_by"      integer,
+    "update_time"    text,
+    "remark"         text(255),
+    PRIMARY KEY ("notice_id")
+);
+
+-- ----------------------------
+-- Records of sys_notice
+-- ----------------------------
+INSERT INTO "sys_notice"
+VALUES (1, '温馨提醒：2018-07-01 新版本发布啦', '2', '新版本内容', '0', 103, 1, '2026-03-14 18:22:16', NULL, NULL,
+        '管理员');
+INSERT INTO "sys_notice"
+VALUES (2, '维护通知：2018-07-01 系统凌晨维护', '1', '维护内容', '0', 103, 1, '2026-03-14 18:22:16', NULL, NULL,
+        '管理员');
+
+-- ----------------------------
+-- Table structure for sys_oper_log
+-- ----------------------------
+DROP TABLE IF EXISTS "sys_oper_log";
+CREATE TABLE "sys_oper_log"
+(
+    "oper_id"        integer NOT NULL,
+    "title"          text(50),
+    "business_type"  integer,
+    "method"         text(100),
+    "request_method" text(10),
+    "operator_type"  integer,
+    "oper_name"      text(50),
+    "dept_name"      text(50),
+    "oper_url"       text(255),
+    "oper_ip"        text(128),
+    "oper_location"  text(255),
+    "oper_param"     text(4000),
+    "json_result"    text(4000),
+    "status"         integer,
+    "error_msg"      text(4000),
+    "oper_time"      text,
+    "cost_time"      integer,
+    PRIMARY KEY ("oper_id")
+);
+
+-- ----------------------------
+-- Records of sys_oper_log
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for sys_oss
+-- ----------------------------
+DROP TABLE IF EXISTS "sys_oss";
+CREATE TABLE "sys_oss"
+(
+    "oss_id"        integer   NOT NULL,
+    "file_name"     text(255) NOT NULL,
+    "original_name" text(255) NOT NULL,
+    "file_suffix"   text(10)  NOT NULL,
+    "url"           text(500) NOT NULL,
+    "ext1"          text,
+    "create_dept"   integer,
+    "create_time"   text,
+    "create_by"     integer,
+    "update_time"   text,
+    "update_by"     integer,
+    "service"       text(20)  NOT NULL,
+    PRIMARY KEY ("oss_id")
+);
+
+-- ----------------------------
+-- Records of sys_oss
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for sys_oss_config
+-- ----------------------------
+DROP TABLE IF EXISTS "sys_oss_config";
+CREATE TABLE "sys_oss_config"
+(
+    "oss_config_id" integer  NOT NULL,
+    "config_key"    text(20) NOT NULL,
+    "access_key"    text(255),
+    "secret_key"    text(255),
+    "bucket_name"   text(255),
+    "prefix"        text(255),
+    "endpoint"      text(255),
+    "domain"        text(255),
+    "is_https"      text(1),
+    "region"        text(255),
+    "access_policy" text(1)  NOT NULL,
+    "status"        text(1),
+    "ext1"          text(255),
+    "create_dept"   integer,
+    "create_by"     integer,
+    "create_time"   text,
+    "update_by"     integer,
+    "update_time"   text,
+    "remark"        text(500),
+    PRIMARY KEY ("oss_config_id")
+);
+
+-- ----------------------------
+-- Records of sys_oss_config
+-- ----------------------------
+INSERT INTO "sys_oss_config"
+VALUES (1, 'minio', 'ruoyi', 'ruoyi123', 'ruoyi', '', '127.0.0.1:9000', '', 'N', '', '1', '0', '', 103, 1,
+        '2026-03-14 18:22:16', 1, '2026-03-14 18:22:16', NULL);
+INSERT INTO "sys_oss_config"
+VALUES (2, 'qiniu', 'XXXXXXXXXXXXXXX', 'XXXXXXXXXXXXXXX', 'ruoyi', '', 's3-cn-north-1.qiniucs.com', '', 'N', '', '1',
+        '1', '', 103, 1, '2026-03-14 18:22:17', 1, '2026-03-14 18:22:17', NULL);
+INSERT INTO "sys_oss_config"
+VALUES (3, 'aliyun', 'XXXXXXXXXXXXXXX', 'XXXXXXXXXXXXXXX', 'ruoyi', '', 'oss-cn-beijing.aliyuncs.com', '', 'N', '', '1',
+        '1', '', 103, 1, '2026-03-14 18:22:17', 1, '2026-03-14 18:22:17', NULL);
+INSERT INTO "sys_oss_config"
+VALUES (4, 'qcloud', 'XXXXXXXXXXXXXXX', 'XXXXXXXXXXXXXXX', 'ruoyi-1240000000', '', 'cos.ap-beijing.myqcloud.com', '',
+        'N', 'ap-beijing', '1', '1', '', 103, 1, '2026-03-14 18:22:17', 1, '2026-03-14 18:22:17', NULL);
+INSERT INTO "sys_oss_config"
+VALUES (5, 'image', 'ruoyi', 'ruoyi123', 'ruoyi', 'image', '127.0.0.1:9000', '', 'N', '', '1', '1', '', 103, 1,
+        '2026-03-14 18:22:17', 1, '2026-03-14 18:22:17', NULL);
+
+-- ----------------------------
+-- Table structure for sys_post
+-- ----------------------------
+DROP TABLE IF EXISTS "sys_post";
+CREATE TABLE "sys_post"
+(
+    "post_id"       integer  NOT NULL,
+    "dept_id"       integer  NOT NULL,
+    "post_code"     text(64) NOT NULL,
+    "post_category" text(100),
+    "post_name"     text(50) NOT NULL,
+    "post_sort"     integer  NOT NULL,
+    "status"        text(1)  NOT NULL,
+    "create_dept"   integer,
+    "create_by"     integer,
+    "create_time"   text,
+    "update_by"     integer,
+    "update_time"   text,
+    "remark"        text(500),
+    PRIMARY KEY ("post_id")
+);
+
+-- ----------------------------
+-- Records of sys_post
+-- ----------------------------
+INSERT INTO "sys_post"
+VALUES (1, 103, 'ceo', NULL, '董事长', 1, '0', 103, 1, '2026-03-14 18:22:13', NULL, NULL, '');
+INSERT INTO "sys_post"
+VALUES (2, 100, 'se', NULL, '项目经理', 2, '0', 103, 1, '2026-03-14 18:22:13', NULL, NULL, '');
+INSERT INTO "sys_post"
+VALUES (3, 100, 'hr', NULL, '人力资源', 3, '0', 103, 1, '2026-03-14 18:22:13', NULL, NULL, '');
+INSERT INTO "sys_post"
+VALUES (4, 100, 'user', NULL, '普通员工', 4, '0', 103, 1, '2026-03-14 18:22:13', NULL, NULL, '');
+
+-- ----------------------------
+-- Table structure for sys_role
+-- ----------------------------
+DROP TABLE IF EXISTS "sys_role";
+CREATE TABLE "sys_role"
+(
+    "role_id"             integer   NOT NULL,
+    "role_name"           text(30)  NOT NULL,
+    "role_key"            text(100) NOT NULL,
+    "role_sort"           integer   NOT NULL,
+    "data_scope"          text(1),
+    "menu_check_strictly" integer(1),
+    "dept_check_strictly" integer(1),
+    "status"              text(1)   NOT NULL,
+    "del_flag"            text(1),
+    "create_dept"         integer,
+    "create_by"           integer,
+    "create_time"         text,
+    "update_by"           integer,
+    "update_time"         text,
+    "remark"              text(500),
+    PRIMARY KEY ("role_id")
+);
+
+-- ----------------------------
+-- Records of sys_role
+-- ----------------------------
+INSERT INTO "sys_role"
+VALUES (1, '超级管理员', 'superadmin', 1, '1', 1, 1, '0', '0', 103, 1, '2026-03-14 18:22:13', NULL, NULL, '超级管理员');
+INSERT INTO "sys_role"
+VALUES (3, '本部门及以下', 'test1', 3, '4', 1, 1, '0', '0', 103, 1, '2026-03-14 18:22:13', NULL, NULL, '');
+INSERT INTO "sys_role"
+VALUES (4, '仅本人', 'test2', 4, '5', 1, 1, '0', '0', 103, 1, '2026-03-14 18:22:13', NULL, NULL, '');
+
+-- ----------------------------
+-- Table structure for sys_role_dept
+-- ----------------------------
+DROP TABLE IF EXISTS "sys_role_dept";
+CREATE TABLE "sys_role_dept"
+(
+    "role_id" integer NOT NULL,
+    "dept_id" integer NOT NULL,
+    PRIMARY KEY ("role_id", "dept_id")
+);
+
+-- ----------------------------
+-- Records of sys_role_dept
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for sys_role_menu
+-- ----------------------------
+DROP TABLE IF EXISTS "sys_role_menu";
+CREATE TABLE "sys_role_menu"
+(
+    "role_id" integer NOT NULL,
+    "menu_id" integer NOT NULL,
+    PRIMARY KEY ("role_id", "menu_id")
+);
+
+-- ----------------------------
+-- Records of sys_role_menu
+-- ----------------------------
+INSERT INTO "sys_role_menu"
+VALUES (3, 1);
+INSERT INTO "sys_role_menu"
+VALUES (3, 5);
+INSERT INTO "sys_role_menu"
+VALUES (3, 100);
+INSERT INTO "sys_role_menu"
+VALUES (3, 101);
+INSERT INTO "sys_role_menu"
+VALUES (3, 102);
+INSERT INTO "sys_role_menu"
+VALUES (3, 103);
+INSERT INTO "sys_role_menu"
+VALUES (3, 104);
+INSERT INTO "sys_role_menu"
+VALUES (3, 105);
+INSERT INTO "sys_role_menu"
+VALUES (3, 106);
+INSERT INTO "sys_role_menu"
+VALUES (3, 107);
+INSERT INTO "sys_role_menu"
+VALUES (3, 108);
+INSERT INTO "sys_role_menu"
+VALUES (3, 118);
+INSERT INTO "sys_role_menu"
+VALUES (3, 123);
+INSERT INTO "sys_role_menu"
+VALUES (3, 130);
+INSERT INTO "sys_role_menu"
+VALUES (3, 131);
+INSERT INTO "sys_role_menu"
+VALUES (3, 132);
+INSERT INTO "sys_role_menu"
+VALUES (3, 133);
+INSERT INTO "sys_role_menu"
+VALUES (3, 500);
+INSERT INTO "sys_role_menu"
+VALUES (3, 501);
+INSERT INTO "sys_role_menu"
+VALUES (3, 1001);
+INSERT INTO "sys_role_menu"
+VALUES (3, 1002);
+INSERT INTO "sys_role_menu"
+VALUES (3, 1003);
+INSERT INTO "sys_role_menu"
+VALUES (3, 1004);
+INSERT INTO "sys_role_menu"
+VALUES (3, 1005);
+INSERT INTO "sys_role_menu"
+VALUES (3, 1006);
+INSERT INTO "sys_role_menu"
+VALUES (3, 1007);
+INSERT INTO "sys_role_menu"
+VALUES (3, 1008);
+INSERT INTO "sys_role_menu"
+VALUES (3, 1009);
+INSERT INTO "sys_role_menu"
+VALUES (3, 1010);
+INSERT INTO "sys_role_menu"
+VALUES (3, 1011);
+INSERT INTO "sys_role_menu"
+VALUES (3, 1012);
+INSERT INTO "sys_role_menu"
+VALUES (3, 1013);
+INSERT INTO "sys_role_menu"
+VALUES (3, 1014);
+INSERT INTO "sys_role_menu"
+VALUES (3, 1015);
+INSERT INTO "sys_role_menu"
+VALUES (3, 1016);
+INSERT INTO "sys_role_menu"
+VALUES (3, 1017);
+INSERT INTO "sys_role_menu"
+VALUES (3, 1018);
+INSERT INTO "sys_role_menu"
+VALUES (3, 1019);
+INSERT INTO "sys_role_menu"
+VALUES (3, 1020);
+INSERT INTO "sys_role_menu"
+VALUES (3, 1021);
+INSERT INTO "sys_role_menu"
+VALUES (3, 1022);
+INSERT INTO "sys_role_menu"
+VALUES (3, 1023);
+INSERT INTO "sys_role_menu"
+VALUES (3, 1024);
+INSERT INTO "sys_role_menu"
+VALUES (3, 1025);
+INSERT INTO "sys_role_menu"
+VALUES (3, 1026);
+INSERT INTO "sys_role_menu"
+VALUES (3, 1027);
+INSERT INTO "sys_role_menu"
+VALUES (3, 1028);
+INSERT INTO "sys_role_menu"
+VALUES (3, 1029);
+INSERT INTO "sys_role_menu"
+VALUES (3, 1030);
+INSERT INTO "sys_role_menu"
+VALUES (3, 1031);
+INSERT INTO "sys_role_menu"
+VALUES (3, 1032);
+INSERT INTO "sys_role_menu"
+VALUES (3, 1033);
+INSERT INTO "sys_role_menu"
+VALUES (3, 1034);
+INSERT INTO "sys_role_menu"
+VALUES (3, 1035);
+INSERT INTO "sys_role_menu"
+VALUES (3, 1036);
+INSERT INTO "sys_role_menu"
+VALUES (3, 1037);
+INSERT INTO "sys_role_menu"
+VALUES (3, 1038);
+INSERT INTO "sys_role_menu"
+VALUES (3, 1039);
+INSERT INTO "sys_role_menu"
+VALUES (3, 1040);
+INSERT INTO "sys_role_menu"
+VALUES (3, 1041);
+INSERT INTO "sys_role_menu"
+VALUES (3, 1042);
+INSERT INTO "sys_role_menu"
+VALUES (3, 1043);
+INSERT INTO "sys_role_menu"
+VALUES (3, 1044);
+INSERT INTO "sys_role_menu"
+VALUES (3, 1045);
+INSERT INTO "sys_role_menu"
+VALUES (3, 1050);
+INSERT INTO "sys_role_menu"
+VALUES (3, 1061);
+INSERT INTO "sys_role_menu"
+VALUES (3, 1062);
+INSERT INTO "sys_role_menu"
+VALUES (3, 1063);
+INSERT INTO "sys_role_menu"
+VALUES (3, 1064);
+INSERT INTO "sys_role_menu"
+VALUES (3, 1065);
+INSERT INTO "sys_role_menu"
+VALUES (3, 1500);
+INSERT INTO "sys_role_menu"
+VALUES (3, 1501);
+INSERT INTO "sys_role_menu"
+VALUES (3, 1502);
+INSERT INTO "sys_role_menu"
+VALUES (3, 1503);
+INSERT INTO "sys_role_menu"
+VALUES (3, 1504);
+INSERT INTO "sys_role_menu"
+VALUES (3, 1505);
+INSERT INTO "sys_role_menu"
+VALUES (3, 1506);
+INSERT INTO "sys_role_menu"
+VALUES (3, 1507);
+INSERT INTO "sys_role_menu"
+VALUES (3, 1508);
+INSERT INTO "sys_role_menu"
+VALUES (3, 1509);
+INSERT INTO "sys_role_menu"
+VALUES (3, 1510);
+INSERT INTO "sys_role_menu"
+VALUES (3, 1511);
+INSERT INTO "sys_role_menu"
+VALUES (3, 1600);
+INSERT INTO "sys_role_menu"
+VALUES (3, 1601);
+INSERT INTO "sys_role_menu"
+VALUES (3, 1602);
+INSERT INTO "sys_role_menu"
+VALUES (3, 1603);
+INSERT INTO "sys_role_menu"
+VALUES (3, 1620);
+INSERT INTO "sys_role_menu"
+VALUES (3, 1621);
+INSERT INTO "sys_role_menu"
+VALUES (3, 1622);
+INSERT INTO "sys_role_menu"
+VALUES (3, 1623);
+INSERT INTO "sys_role_menu"
+VALUES (3, 11616);
+INSERT INTO "sys_role_menu"
+VALUES (3, 11618);
+INSERT INTO "sys_role_menu"
+VALUES (3, 11619);
+INSERT INTO "sys_role_menu"
+VALUES (3, 11622);
+INSERT INTO "sys_role_menu"
+VALUES (3, 11623);
+INSERT INTO "sys_role_menu"
+VALUES (3, 11629);
+INSERT INTO "sys_role_menu"
+VALUES (3, 11632);
+INSERT INTO "sys_role_menu"
+VALUES (3, 11633);
+INSERT INTO "sys_role_menu"
+VALUES (3, 11638);
+INSERT INTO "sys_role_menu"
+VALUES (3, 11639);
+INSERT INTO "sys_role_menu"
+VALUES (3, 11640);
+INSERT INTO "sys_role_menu"
+VALUES (3, 11641);
+INSERT INTO "sys_role_menu"
+VALUES (3, 11642);
+INSERT INTO "sys_role_menu"
+VALUES (3, 11643);
+INSERT INTO "sys_role_menu"
+VALUES (3, 11701);
+INSERT INTO "sys_role_menu"
+VALUES (4, 5);
+INSERT INTO "sys_role_menu"
+VALUES (4, 1500);
+INSERT INTO "sys_role_menu"
+VALUES (4, 1501);
+INSERT INTO "sys_role_menu"
+VALUES (4, 1502);
+INSERT INTO "sys_role_menu"
+VALUES (4, 1503);
+INSERT INTO "sys_role_menu"
+VALUES (4, 1504);
+INSERT INTO "sys_role_menu"
+VALUES (4, 1505);
+INSERT INTO "sys_role_menu"
+VALUES (4, 1506);
+INSERT INTO "sys_role_menu"
+VALUES (4, 1507);
+INSERT INTO "sys_role_menu"
+VALUES (4, 1508);
+INSERT INTO "sys_role_menu"
+VALUES (4, 1509);
+INSERT INTO "sys_role_menu"
+VALUES (4, 1510);
+INSERT INTO "sys_role_menu"
+VALUES (4, 1511);
+
+-- ----------------------------
+-- Table structure for sys_social
+-- ----------------------------
+DROP TABLE IF EXISTS "sys_social";
+CREATE TABLE "sys_social"
+(
+    "id"                 integer    NOT NULL,
+    "user_id"            integer    NOT NULL,
+    "auth_id"            text(255)  NOT NULL,
+    "source"             text(255)  NOT NULL,
+    "open_id"            text(255),
+    "user_name"          text(30)   NOT NULL,
+    "nick_name"          text(30),
+    "email"              text(255),
+    "avatar"             text(500),
+    "access_token"       text(2000) NOT NULL,
+    "expire_in"          integer,
+    "refresh_token"      text(255),
+    "access_code"        text(2000),
+    "union_id"           text(255),
+    "scope"              text(255),
+    "token_type"         text(255),
+    "id_token"           text(2000),
+    "mac_algorithm"      text(255),
+    "mac_key"            text(255),
+    "code"               text(255),
+    "oauth_token"        text(255),
+    "oauth_token_secret" text(255),
+    "create_dept"        integer,
+    "create_by"          integer,
+    "create_time"        text,
+    "update_by"          integer,
+    "update_time"        text,
+    "del_flag"           text(1),
+    PRIMARY KEY ("id")
+);
+
+-- ----------------------------
+-- Records of sys_social
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for sys_user
+-- ----------------------------
+DROP TABLE IF EXISTS "sys_user";
+CREATE TABLE "sys_user"
+(
+    "user_id"     integer  NOT NULL,
+    "dept_id"     integer,
+    "user_name"   text(30) NOT NULL,
+    "nick_name"   text(30) NOT NULL,
+    "user_type"   text(10),
+    "email"       text(50),
+    "phonenumber" text(11),
+    "sex"         text(1),
+    "avatar"      integer,
+    "password"    text(100),
+    "status"      text(1),
+    "del_flag"    text(1),
+    "login_ip"    text(128),
+    "login_date"  text,
+    "create_dept" integer,
+    "create_by"   integer,
+    "create_time" text,
+    "update_by"   integer,
+    "update_time" text,
+    "remark"      text(500),
+    PRIMARY KEY ("user_id")
+);
+
+-- ----------------------------
+-- Records of sys_user
+-- ----------------------------
+INSERT INTO "sys_user"
+VALUES (1, 103, 'admin', '疯狂的狮子Li', 'sys_user', 'crazyLionLi@163.com', '15888888888', '1', NULL,
+        '$2a$10$7JB720yubVSZvUI0rEqK/.VqGOZTH.ulu33dHOiBE8ByOhJIrdAu2', '0', '0', '127.0.0.1', '2026-03-14 18:22:12',
+        103, 1, '2026-03-14 18:22:12', NULL, NULL, '管理员');
+INSERT INTO "sys_user"
+VALUES (3, 108, 'test', '本部门及以下 密码666666', 'sys_user', '', '', '0', NULL,
+        '$2a$10$b8yUzN0C71sbz.PhNOCgJe.Tu1yWC3RNrTyjSQ8p1W0.aaUXUJ.Ne', '0', '0', '127.0.0.1', '2026-03-14 18:22:12',
+        103, 1, '2026-03-14 18:22:12', 3, '2026-03-14 18:22:12', NULL);
+INSERT INTO "sys_user"
+VALUES (4, 102, 'test1', '仅本人 密码666666', 'sys_user', '', '', '0', NULL,
+        '$2a$10$b8yUzN0C71sbz.PhNOCgJe.Tu1yWC3RNrTyjSQ8p1W0.aaUXUJ.Ne', '0', '0', '127.0.0.1', '2026-03-14 18:22:12',
+        103, 1, '2026-03-14 18:22:12', 4, '2026-03-14 18:22:12', NULL);
+
+-- ----------------------------
+-- Table structure for sys_user_post
+-- ----------------------------
+DROP TABLE IF EXISTS "sys_user_post";
+CREATE TABLE "sys_user_post"
+(
+    "user_id" integer NOT NULL,
+    "post_id" integer NOT NULL,
+    PRIMARY KEY ("user_id", "post_id")
+);
+
+-- ----------------------------
+-- Records of sys_user_post
+-- ----------------------------
+INSERT INTO "sys_user_post"
+VALUES (1, 1);
+
+-- ----------------------------
+-- Table structure for sys_user_role
+-- ----------------------------
+DROP TABLE IF EXISTS "sys_user_role";
+CREATE TABLE "sys_user_role"
+(
+    "user_id" integer NOT NULL,
+    "role_id" integer NOT NULL,
+    PRIMARY KEY ("user_id", "role_id")
+);
+
+-- ----------------------------
+-- Records of sys_user_role
+-- ----------------------------
+INSERT INTO "sys_user_role"
+VALUES (1, 1);
+INSERT INTO "sys_user_role"
+VALUES (3, 3);
+INSERT INTO "sys_user_role"
+VALUES (4, 4);
+
+-- ----------------------------
+-- Table structure for test_demo
+-- ----------------------------
+DROP TABLE IF EXISTS "test_demo";
+CREATE TABLE "test_demo"
+(
+    "id"          integer NOT NULL,
+    "dept_id"     integer,
+    "user_id"     integer,
+    "order_num"   integer,
+    "test_key"    text(255),
+    "value"       text(255),
+    "version"     integer,
+    "create_dept" integer,
+    "create_time" text,
+    "create_by"   integer,
+    "update_time" text,
+    "update_by"   integer,
+    "del_flag"    integer,
+    PRIMARY KEY ("id")
+);
+
+-- ----------------------------
+-- Records of test_demo
+-- ----------------------------
+INSERT INTO "test_demo"
+VALUES (1, 102, 4, 1, '测试数据权限', '测试', 0, 103, '2026-03-14 18:22:17', 1, NULL, NULL, 0);
+INSERT INTO "test_demo"
+VALUES (2, 102, 3, 2, '子节点1', '111', 0, 103, '2026-03-14 18:22:17', 1, NULL, NULL, 0);
+INSERT INTO "test_demo"
+VALUES (3, 102, 3, 3, '子节点2', '222', 0, 103, '2026-03-14 18:22:17', 1, NULL, NULL, 0);
+INSERT INTO "test_demo"
+VALUES (4, 108, 4, 4, '测试数据', 'demo', 0, 103, '2026-03-14 18:22:17', 1, NULL, NULL, 0);
+INSERT INTO "test_demo"
+VALUES (5, 108, 3, 13, '子节点11', '1111', 0, 103, '2026-03-14 18:22:17', 1, NULL, NULL, 0);
+INSERT INTO "test_demo"
+VALUES (6, 108, 3, 12, '子节点22', '2222', 0, 103, '2026-03-14 18:22:17', 1, NULL, NULL, 0);
+INSERT INTO "test_demo"
+VALUES (7, 108, 3, 11, '子节点33', '3333', 0, 103, '2026-03-14 18:22:17', 1, NULL, NULL, 0);
+INSERT INTO "test_demo"
+VALUES (8, 108, 3, 10, '子节点44', '4444', 0, 103, '2026-03-14 18:22:17', 1, NULL, NULL, 0);
+INSERT INTO "test_demo"
+VALUES (9, 108, 3, 9, '子节点55', '5555', 0, 103, '2026-03-14 18:22:17', 1, NULL, NULL, 0);
+INSERT INTO "test_demo"
+VALUES (10, 108, 3, 8, '子节点66', '6666', 0, 103, '2026-03-14 18:22:17', 1, NULL, NULL, 0);
+INSERT INTO "test_demo"
+VALUES (11, 108, 3, 7, '子节点77', '7777', 0, 103, '2026-03-14 18:22:17', 1, NULL, NULL, 0);
+INSERT INTO "test_demo"
+VALUES (12, 108, 3, 6, '子节点88', '8888', 0, 103, '2026-03-14 18:22:17', 1, NULL, NULL, 0);
+INSERT INTO "test_demo"
+VALUES (13, 108, 3, 5, '子节点99', '9999', 0, 103, '2026-03-14 18:22:17', 1, NULL, NULL, 0);
+
+-- ----------------------------
+-- Table structure for test_tree
+-- ----------------------------
+DROP TABLE IF EXISTS "test_tree";
+CREATE TABLE "test_tree"
+(
+    "id"          integer NOT NULL,
+    "parent_id"   integer,
+    "dept_id"     integer,
+    "user_id"     integer,
+    "tree_name"   text(255),
+    "version"     integer,
+    "create_dept" integer,
+    "create_time" text,
+    "create_by"   integer,
+    "update_time" text,
+    "update_by"   integer,
+    "del_flag"    integer,
+    PRIMARY KEY ("id")
+);
+
+-- ----------------------------
+-- Records of test_tree
+-- ----------------------------
+INSERT INTO "test_tree"
+VALUES (1, 0, 102, 4, '测试数据权限', 0, 103, '2026-03-14 18:22:17', 1, NULL, NULL, 0);
+INSERT INTO "test_tree"
+VALUES (2, 1, 102, 3, '子节点1', 0, 103, '2026-03-14 18:22:17', 1, NULL, NULL, 0);
+INSERT INTO "test_tree"
+VALUES (3, 2, 102, 3, '子节点2', 0, 103, '2026-03-14 18:22:17', 1, NULL, NULL, 0);
+INSERT INTO "test_tree"
+VALUES (4, 0, 108, 4, '测试树1', 0, 103, '2026-03-14 18:22:17', 1, NULL, NULL, 0);
+INSERT INTO "test_tree"
+VALUES (5, 4, 108, 3, '子节点11', 0, 103, '2026-03-14 18:22:17', 1, NULL, NULL, 0);
+INSERT INTO "test_tree"
+VALUES (6, 4, 108, 3, '子节点22', 0, 103, '2026-03-14 18:22:17', 1, NULL, NULL, 0);
+INSERT INTO "test_tree"
+VALUES (7, 4, 108, 3, '子节点33', 0, 103, '2026-03-14 18:22:17', 1, NULL, NULL, 0);
+INSERT INTO "test_tree"
+VALUES (8, 5, 108, 3, '子节点44', 0, 103, '2026-03-14 18:22:17', 1, NULL, NULL, 0);
+INSERT INTO "test_tree"
+VALUES (9, 6, 108, 3, '子节点55', 0, 103, '2026-03-14 18:22:17', 1, NULL, NULL, 0);
+INSERT INTO "test_tree"
+VALUES (10, 7, 108, 3, '子节点66', 0, 103, '2026-03-14 18:22:17', 1, NULL, NULL, 0);
+INSERT INTO "test_tree"
+VALUES (11, 7, 108, 3, '子节点77', 0, 103, '2026-03-14 18:22:17', 1, NULL, NULL, 0);
+INSERT INTO "test_tree"
+VALUES (12, 10, 108, 3, '子节点88', 0, 103, '2026-03-14 18:22:17', 1, NULL, NULL, 0);
+INSERT INTO "test_tree"
+VALUES (13, 10, 108, 3, '子节点99', 0, 103, '2026-03-14 18:22:17', 1, NULL, NULL, 0);
+
+-- ----------------------------
+-- Indexes structure for table sys_dict_type
+-- ----------------------------
+CREATE UNIQUE INDEX "dict_type"
+    ON "sys_dict_type" (
+                        "dict_type" ASC
+        );
+
+-- ----------------------------
+-- Indexes structure for table sys_login_info
+-- ----------------------------
+CREATE INDEX "idx_sys_login_info_lt"
+    ON "sys_login_info" (
+                         "login_time" ASC
+        );
+CREATE INDEX "idx_sys_login_info_s"
+    ON "sys_login_info" (
+                         "status" ASC
+        );
+
+-- ----------------------------
+-- Indexes structure for table sys_oper_log
+-- ----------------------------
+CREATE INDEX "idx_sys_oper_log_bt"
+    ON "sys_oper_log" (
+                       "business_type" ASC
+        );
+CREATE INDEX "idx_sys_oper_log_ot"
+    ON "sys_oper_log" (
+                       "oper_time" ASC
+        );
+CREATE INDEX "idx_sys_oper_log_s"
+    ON "sys_oper_log" (
+                       "status" ASC
+        );
+
+

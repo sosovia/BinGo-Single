@@ -1,0 +1,4 @@
+com.bingo.common.web.config.CaptchaConfig
+com.bingo.common.web.config.FilterConfig
+com.bingo.common.web.config.I18nConfig
+com.bingo.common.web.config.ResourcesConfig
